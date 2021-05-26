@@ -1,13 +1,14 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
-
+import Coin from './Components/Coin'
 
 
 function App() {
 
 
-  // creating state for data
+  // creating state for data, setCoins is used for getting data from API and setSearch gets user input
   const [coins, setCoins] = useState([]);
+  const [search, setSearch] = useState('');
 
   // useEffect takes in arrow function that gets API url, then then response is the data from the API with an error checker
   
@@ -20,6 +21,16 @@ function App() {
     .catch(error => { console.log(error)});
   }, []);
 
+  // handles user input to get data from
+  const handleChange = e => {
+    setSearch(e.target.value);
+  }
+
+  // filters the change of coins, it changes everything to lower case letters to display what user types in
+  const filterCoin = coins.filter(coin => 
+    coin.name.toLowerCase().includes(search.toLowerCase())
+    )
+
   return (
     <div className="App">
       
@@ -27,9 +38,13 @@ function App() {
           <div className="mainSearch">
             <h1 className="mainText"> Crypto Currency Search</h1>
             <form>
-              <input type='text' placeholder='Search' className="searchBTN"/>
-            </form>
+              <input type='text' placeholder='Search' className="searchBTN" onChange={handleChange}/>
+            </form> 
           </div>
+
+          {filterCoin.map(coin => {
+            return <Coin key={coin} name={coin.name} image={coin.image} symbol={coin.symbol} volume={coin.market_cap} price={coin.current_price}/>;
+          })}
       </div>
       
 
