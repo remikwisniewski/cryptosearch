@@ -31,9 +31,7 @@ function App() {
     coin.name.toLowerCase().includes(search.toLowerCase())
     )
 
-  return (
-    <div className="App">
-      
+  return (   
       <div className="mainApp">
           <div className="mainSearch">
             <h1 className="mainText"> Crypto Currency Search</h1>
@@ -57,10 +55,6 @@ function App() {
             );
           })}
       </div>
-      
-
-      
-    </div>
   );
 }
 
