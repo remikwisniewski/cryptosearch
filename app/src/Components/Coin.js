@@ -1,7 +1,8 @@
 import React from 'react';
 
 // arrow function Coin that 
-const Coin = ({name, image, symbol, price, volume}) => {
+const Coin = ({name, price, symbol, marketcap, volume, priceChange, image}) => {
+
 
     return (
         <div className='coinContainer'>
@@ -14,9 +15,17 @@ const Coin = ({name, image, symbol, price, volume}) => {
                 <div className='coinData'>
                     <p className='coinPrice'>${price}</p>
                     <p className='coinVolume'>${volume.toLocaleString()}</p>
+
+                    {priceChange < 0 ? (
+                        <p className='coinRed'>{priceChange.toFixed(2)}%</p>
+                    ) : (
+                        <p className='coinGreen'>{priceChange.toFixed(2)}%</p>
+                    )}
+
+                    <p className='coinMarketcap'> Mkt Cap: ${marketcap.toLocaleString()} </p>
                 </div>
             </div>
-        </div>
+        </div> // JSX CODE to make red/green output based on price change
     )
 } 
 
